@@ -2,7 +2,7 @@ import math
 
 # Code along with Valerio Velardo - The Sound of AI
 
-
+# activation function of choice [can be anything]
 def sigmoid(x):
     y = 1.0 / (1+ math.exp(-x))
     return y
