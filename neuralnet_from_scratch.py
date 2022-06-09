@@ -76,8 +76,38 @@ class MLP:
 
         for i in range(len(self.weights)):
             weights = self.weights[i]
+            #print("Original W{} {}".format(i, weights))
+
             derivatives = self.derivatives[i]
             weights += (derivatives * learning_rate)
+            #print("Updated W{} {}".format(i, weights))
+    
+    def train(self, inputs, targets, epochs, learning_rate):
+        for i in range(epochs):
+            sum_error = 0
+            for j, (input, target) in enumerate(zip(inputs, targets)):
+
+                #forward propagate
+                output = self.forward_propagate(input, target)
+
+                # calculate error
+                error = target - output
+
+                # backward propagate
+                self.back_propagage(error)
+
+                # apply gradient descent
+                mlp.gradient_descent(learning_rate)
+                
+                self.gradient_descent(learning_rate)
+
+                sum_error += self._mse(target, output)
+
+                # report error for each epoch
+                print("Error is {} at epoch {}".format(sum_error/len(inputs), i))
+
+    def _mse(self, target, output):
+        return np.average((target-output)**2)
 
     def _sigmoid_derivative(self, x):
         return x * (1.0 - x)
@@ -95,12 +125,3 @@ if __name__ == "__main__":
     # print results
     print("The network input is: {}".format(inputs))
     print("The network output is: {}".format(outputs))
-
-    # calculate error
-    error = target - outputs
-
-    # backward propagate
-    mlp.back_propagage(outputs, verbose=True)
-
-    # apply gradient descent
-    mlp.gradient_descent()
