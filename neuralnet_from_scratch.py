@@ -1,4 +1,5 @@
 import numpy as np
+from random import random
 
 # save activations and derivatives
 
@@ -85,10 +86,10 @@ class MLP:
     def train(self, inputs, targets, epochs, learning_rate):
         for i in range(epochs):
             sum_error = 0
-            for j, (input, target) in enumerate(zip(inputs, targets)):
+            for input, target in zip(inputs, targets):
 
                 #forward propagate
-                output = self.forward_propagate(input, target)
+                output = self.forward_propagate(input)
 
                 # calculate error
                 error = target - output
@@ -118,10 +119,16 @@ if __name__ == "__main__":
     mlp = MLP(2, [5], 1)
     # create 
     #inputs = np.random.rand(mlp.num_inputs)
-    inputs = np.array([0.1,0.2])
-    target = np.array([0.3])
-    # forward propagate
-    outputs = mlp.forward_propagate(inputs)
-    # print results
-    print("The network input is: {}".format(inputs))
-    print("The network output is: {}".format(outputs))
+    inputs = np.array([[random() / 2 for _ in range (2)] for _ in range (1000)])
+
+    targets = np.array([[i[0] + i[1]] for i in inputs])
+
+    # train the mlp
+    mlp.train(inputs, targets, 150, .25)
+  
+    # test our mlp
+    input = np.array([0.3,0.1])
+    output = np.array([0.4])
+
+    output = mlp.forward_propagate(input)
+    print("\nTesting out mlp after training... Our MLP believes that {} + {} is {}".format(input[0], input[1], output[0]))
