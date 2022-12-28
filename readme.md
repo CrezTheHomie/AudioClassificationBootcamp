@@ -6,9 +6,9 @@ The program I'm thinking of building is going to be a software solution that mix
 ## Steps to take
 
 Seperated out, the steps I need to learn are:
-1. Make a transcript of the audio by recognizing human speech.
-2. Make an IPA transcript of audio from human speech.
-3. Use a model to predict accent based on human speech.
+#### 1. Make a transcript of the audio by recognizing human speech.
+#### 2. Make an IPA transcript of audio from human speech.
+#### 3. Use a model to predict accent based on human speech.
 
 ## Notes 
 
