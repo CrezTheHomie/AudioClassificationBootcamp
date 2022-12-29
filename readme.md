@@ -3,7 +3,7 @@
 The purpose of this repository is going to be planning out the learning required that I will need as well as practicing the different classifications for the program I'm thinking of building.  
 The program I'm thinking of building is going to be a software solution that mixes an audio classifier for recognizing an accent based on an audio stream as well as live feedback building a transcript of speech and showing what that transcript would look like with a different accent.  
 
-Initial learning steps are to follow [Valerio Valardo's Youtube course][the sound of AI]
+Initial learning steps are to follow [Valerio Valardo's Youtube course][the sound of AI]  
 [the sound of AI]:https://www.youtube.com/@ValerioVelardoTheSoundofAI
 
 ## Steps to take
