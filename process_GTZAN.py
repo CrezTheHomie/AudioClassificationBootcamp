@@ -2,6 +2,7 @@ from preprocess_GTZAN import *
 import numpy as np
 from sklearn.model_selection import train_test_split
 from tensorflow import keras
+import matplotlib.pyplot as plt
 
 def load_data(DATASET_PATH):
     with open(JSON_PATH, "r") as fp:
@@ -14,10 +15,27 @@ def load_data(DATASET_PATH):
     return inputs, targets
 
 
-# split data between test and train
-# build ML arch
+def plot_history(history):
 
+    fig, axs = plt.subplots(2)
 
+    # create accuracy subplot
+    axs[0].plot(history.history["accuracy"], label="train accuracy")
+    axs[0].plot(history.history["val_accuracy"], label="test accuracy")
+    axs[0].set_ylabel("Accuracy")
+    axs[0].legend(loc="lower right corner")
+    axs[0].set_title("Accuracy Eval")
+
+    # create error/loss subplot
+    axs[1].plot(history.history["loss"], label="train error")
+    axs[1].plot(history.history["val_loss"], label="test error")
+    axs[1].set_ylabel("loss")
+    axs[1].set_xlabel("Epoch")
+    axs[1].legend(loc="upper right corner")
+    axs[1].set_title("loss Eval")
+
+    plt.show()
+    
 
 if __name__ == "__main__":
     # load data
@@ -44,7 +62,10 @@ if __name__ == "__main__":
     model.summary()
 
     # train
-    model.fit(inputs_train, targets_train, validation_data=(inputs_test, targets_test), epochs = 50, batch_size=32)
+    history = model.fit(inputs_train, targets_train, validation_data=(inputs_test, targets_test), epochs = 50, batch_size=32)
     
     # from our training set, our output is looking good, but our output for our validation set, our model performs poorly
     # we have overfitted!
+
+    # lets plot the accuracy and error over the epochs
+    plot_history(history)
