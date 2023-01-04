@@ -56,7 +56,7 @@ def save_mfcc(dataset_path, json_path, n_mfcc=13, n_fft=2048, hop_length=512, nu
         if dirpath is not dataset_path:
             
             # save semantic label
-            dirpath_components = dirpath.split("/")
+            dirpath_components = dirpath.split("\\")
             semantic_label = dirpath_components[-1]
             data["mapping"].append(semantic_label)
             print("\nProcessing {}".format(semantic_label))
